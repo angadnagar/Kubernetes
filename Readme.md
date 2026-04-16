@@ -1,3 +1,7 @@
+# Kubernetes Architecture
+<img width="1249" height="616" alt="Screenshot 2026-04-16 184449" src="https://github.com/user-attachments/assets/1c3df423-bf14-4cf4-a86d-aa011c7dbeba" />
+
+
 # Create a kind-config.yml file
 
 
