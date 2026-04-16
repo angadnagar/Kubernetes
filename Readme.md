@@ -31,7 +31,7 @@ kubectl cluster-info
 kubectl get ns
 
 ## for checking pods
-kubectl get pods  
+kubectl get pods
 
 (if in particular namespace)
 kubectl get pods -n <namespace>
@@ -39,3 +39,27 @@ kubectl get pods -n <namespace>
 ## we can go into exec mode for that pod
 
 kubectl exec -it <pod-name> -n <namespace> -- bash
+
+## for debugging
+
+kubectl describe pod/<pod-name> -n <namespace>
+
+
+## for scaling our deployment
+kubectl scale deployment/<deployment-name> -n <namespace> --replicas=5
+
+## for more info for pods
+kubectl get pods -n <namespace> -o wide
+
+## we can also change image for deployment
+kubectl set image deployment/<dep-name> -n <namespace> <container-name>=version
+
+example:
+kubectl set image deployment/nginx-dep -n nginx nginx=nginx:latest
+
+## replicaset is same as deployment but the main difference is that we can roll updates or roll backack update possible in deployment
+
+## daemonset ensures that on each and every worker node atleast one pod will run
+
+## we can see logs of pod 
+kubectl logs pod/<pod-name> -n <namespace>
