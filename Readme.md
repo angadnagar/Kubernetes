@@ -83,3 +83,10 @@ kubectl set image deployment/nginx-dep -n nginx nginx=nginx:latest
 ```yaml
 kubectl logs pod/<pod-name> -n <namespace>
 ```
+
+# Persistent Volumes and Persistent Volume Claims
+<img width="887" height="626" alt="image" src="https://github.com/user-attachments/assets/364deeb3-288b-4376-91a3-de07edd35b50" />
+
+## we will create a persistent volume(let suppose 1 Gi) from 30 Gb (host machine space) and later to claim this we will create persistent volume claim so it helps us to store our data even when the pod crashed or deleted as in our deployment.yml if any pod crashed or deleted then we can mount the data of the pod to this persistent volume claim so that when pod deleted we have our data in our mounted path.
+## Example in case of nginx (data is available at var/www/html so we mount this path to our PVC so that all our data will be stored in our 1Gi volume)
+
