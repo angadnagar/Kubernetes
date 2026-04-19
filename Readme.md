@@ -99,9 +99,8 @@ kubectl get all -n <namespace>
 # while creating service
 
 ## our cluster is docker container so we have to forward port for this docker container 
-
+```yaml
 kubectl port-forward service/<our-service-name> -n <namespace> <Port to be mapped with our system port>:<Port of system> --address=<Address to be expose>
 
-```yaml
 kubectl port-forward service/nginx-service -n nginx 80:80 --adress=0.0.0.0
 ```
