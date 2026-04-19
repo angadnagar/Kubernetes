@@ -90,3 +90,17 @@ kubectl logs pod/<pod-name> -n <namespace>
 ## we will create a persistent volume(let suppose 1 Gi) from 30 Gb (host machine space) and later to claim this we will create persistent volume claim so it helps us to store our data even when the pod crashed or deleted as in our deployment.yml if any pod crashed or deleted then we can mount the data of the pod to this persistent volume claim so that when pod deleted we have our data in our mounted path.
 ## Example in case of nginx (data is available at var/www/html so we mount this path to our PVC so that all our data will be stored in our 1Gi volume)
 
+
+## getting everything(pod,deployment,service)
+```yaml
+kubectl get all -n <namespace>
+```
+
+# while creating service
+
+## our cluster is docker container so we have to forward port for this docker container 
+## kubectl port-forward service/<our-service-name> -n <namespace> <Port to be mapped with our system port>:<Port of system> --address=<Address to be expose>
+
+```yaml
+kubectl port-forward service/nginx-service -n nginx 80:80 --adress=0.0.0.0
+```
