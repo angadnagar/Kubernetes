@@ -1,4 +1,4 @@
-# Kubernetes Architecture
+<img width="1332" height="954" alt="image" src="https://github.com/user-attachments/assets/ed4edbb3-65d3-4401-af8b-570fcc1c2cfd" /># Kubernetes Architecture
 <img width="1249" height="616" alt="Screenshot 2026-04-16 184449" src="https://github.com/user-attachments/assets/1c3df423-bf14-4cf4-a86d-aa011c7dbeba" />
 
 
@@ -104,3 +104,15 @@ kubectl port-forward service/<our-service-name> -n <namespace> <Port to be mappe
 
 kubectl port-forward service/nginx-service -n nginx 80:80 --adress=0.0.0.0
 ```
+
+# ingress
+
+<img width="1332" height="954" alt="image" src="https://github.com/user-attachments/assets/95d8b709-1333-4f11-a6c1-b343cf13ca69" />
+
+## Ingress acts to transfer traffic/route to our different services, let say /nginx will go to nginx-service and /app will go to our app so we can route our traffic with the help of ingress.
+
+## we need to apply yaml files for ingress controller
+```yaml
+kubectl apply -f https://kind.sigs.k8s.io/examples/ingress/deploy-ingress-nginx.yaml
+```
+
