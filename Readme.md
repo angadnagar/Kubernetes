@@ -139,3 +139,6 @@ kubectl port-forward service/ingress-nginx-controller -n ingress-nginx 80:80 --a
 ## For service we have to specify ClusterIP as None so that it will not accessed by outside
 
 
+# resources and limits for pod
+
+## we define the resources we require for our pod (cpu: 100m,memory: 128Mi) and limits(cpu: 200m,memory: 256Mi) so that it will ensure cluster stability by not overusing any resources.
