@@ -116,3 +116,16 @@ kubectl port-forward service/nginx-service -n nginx 80:80 --adress=0.0.0.0
 kubectl apply -f https://kind.sigs.k8s.io/examples/ingress/deploy-ingress-nginx.yaml
 ```
 
+## then we create ingress.yml file in which we route our services
+
+## Main tricky part - Our ingress is running through ingress-controller(which we installed using that kind command) so we have to expose that ingress-controller
+
+```yaml
+kubectl get service -n ingress-nginx
+```
+
+## then we will get (ingress-nginx-controller)
+```yaml
+kubectl port-forward service/ingress-nginx-controller -n ingress-nginx 80:80 --address=0.0.0.0
+```
+
