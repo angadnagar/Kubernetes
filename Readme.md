@@ -129,3 +129,13 @@ kubectl get service -n ingress-nginx
 kubectl port-forward service/ingress-nginx-controller -n ingress-nginx 80:80 --address=0.0.0.0
 ```
 
+
+# Statefulset
+<img width="1364" height="794" alt="Screenshot 2026-04-21 223141" src="https://github.com/user-attachments/assets/1f8aff08-c05e-4fde-8d01-ebfcca3e859e" />
+
+## It is similar like deployment but in case of deployments state is not maintained for example pods are created with random name (as dep-pod-rvzx or dep-pod-wers) like this and if we delete any of these pod its state will gone so to maintain state Statefulsets are used in case of stateful sets pods are created in sequential manner(stateful-pod-0, stateful-pod-1 ....) like this and if we delete any of this pod then new pod is also created with that same name only which we deleted and its state is also maintained.
+
+## in statefulset.yml file we have written how we can create stateful set and we introduced about env variables also that how we can store our variables in configMap and secret and how we can fetch that in statefulset.yml
+## For service we have to specify ClusterIP as None so that it will not accessed by outside
+
+
