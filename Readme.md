@@ -148,6 +148,9 @@ kubectl port-forward service/ingress-nginx-controller -n ingress-nginx 80:80 --a
   ## Readiness
   ## Startup
 
+  <img width="1107" height="539" alt="Screenshot 2026-04-27 215044" src="https://github.com/user-attachments/assets/2b711bc1-c18c-41e3-8bcb-4c7f1018a443" />
+
+
   ## in the deployment spec we can specify liveness probes, readiness probes to check our pods is successfully running or not.
 
 # Taints/Tolerance
@@ -182,6 +185,9 @@ so this will help us to tolerate that node and pod will scheduled on node.
 # AutoScaling - HPA, VPA, KEDA(Kubernetes Event Driven AutoScaling)
 ## HPA - Increase the number of replicas (Horizontal Scaling)
 ## VPA - Increase the resources of the pod(earlier - 100Mi , now - 500Mi CPU) (Vertical Scaling)
+
+<img width="1632" height="964" alt="Screenshot 2026-04-27 221112" src="https://github.com/user-attachments/assets/8c609ddb-d963-44b4-84c3-4141e62c6ecf" />
+
 
 ## Metrics is used to check the resources of our nodes so if we are using kind then we have to install metrics server
 
