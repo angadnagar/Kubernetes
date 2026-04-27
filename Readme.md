@@ -142,3 +142,71 @@ kubectl port-forward service/ingress-nginx-controller -n ingress-nginx 80:80 --a
 # resources and limits for pod
 
 ## we define the resources we require for our pod (cpu: 100m,memory: 128Mi) and limits(cpu: 200m,memory: 256Mi) so that it will ensure cluster stability by not overusing any resources.
+
+# Probes - it is a kind of request to check that pod is working or not
+  ## Liveness
+  ## Readiness
+  ## Startup
+
+  ## in the deployment spec we can specify liveness probes, readiness probes to check our pods is successfully running or not.
+
+# Taints/Tolerance
+## Taint - it is a way to tell our kubernetes cluster to not schedule pod on that particular node.
+## if any node is tainted then also if we want to schedule pod to it then we add tolerance to it so that pod will be scheduled there
+
+## Way of taint:
+```yaml
+we can find out nodes by kubectl get nodes
+
+kubectl taint node <our node name> prod=true:NoSchedule
+
+For untaint
+kubectl taint node <our node name> prod=true:NoSchedule-
+```
+## now when pod is creating it will not schedule on that particular taint node
+
+## if we want to tolerate then we have to add this in pod.yml(pod specs)
+ ## we have given this key as prod because we used this command for taint
+ ## kubectl taint node <our node name> prod=true:NoSchedule
+```yaml
+spec:
+  tolerations:
+  - key: "prod"
+    operator: "Equal"
+    value: "true"
+    effect: "NoSchedule"
+
+so this will help us to tolerate that node and pod will scheduled on node.
+```
+
+# AutoScaling - HPA, VPA, KEDA(Kubernetes Event Driven AutoScaling)
+## HPA - Increase the number of replicas (Horizontal Scaling)
+## VPA - Increase the resources of the pod(earlier - 100Mi , now - 500Mi CPU) (Vertical Scaling)
+
+## Metrics is used to check the resources of our nodes so if we are using kind then we have to install metrics server
+
+## If we are using Kind Cluster install Metrics Server
+```yaml
+kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+```
+
+## edit the metric server deployment
+```yaml
+kubectl -n kube-system edit deployment metrics-server
+```
+## add the security bypass to deployment under container.args
+```yaml
+- --kubelet-insecure-tls
+- --kubelet-preferred-address-types=InternalIP,Hostname,ExternalIP
+```
+
+## Restart the deployment
+```yaml
+kubectl -n kube-system rollout restart deployment metrics-server
+```
+
+## To verify metrics server is running
+```yaml
+kubectl get pods -n kube-system
+kubectl top nodes
+```
