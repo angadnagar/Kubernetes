@@ -216,3 +216,30 @@ kubectl -n kube-system rollout restart deployment metrics-server
 kubectl get pods -n kube-system
 kubectl top nodes
 ```
+
+# For VPA
+## we have to download some files from git 
+## git clone https://github.com/kubernetes/autoscaler.git
+
+## Run ./hack/vpa-up.sh
+
+# RBAC(Role Based Access Control)
+## we have to understand two things for this:
+- service account
+- user
+
+## service account
+## it is on namespace level generally, and we have roles(that we can get/delete pods,deployments... in this namespace) and a role binding(for giving this role to service account)
+
+## user
+## it is on cluster level, and we have cluster role and cluster role binding
+
+## kubectl auth whoami, it tells about who is the current user
+
+## if we want to check what access user has
+```yaml
+kubectl auth can-i get pods
+kubectl auth can-i get deployment -n <namespace>
+```
+
+## so we should create a role.yml file in which we tell what we can access
