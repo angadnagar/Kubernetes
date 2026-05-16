@@ -242,4 +242,92 @@ kubectl auth can-i get pods
 kubectl auth can-i get deployment -n <namespace>
 ```
 
-## so we should create a role.yml file in which we tell what we can access
+## we create service-account.yml(new account on which we provide roles)
+```yaml
+kubectl auth can-i get pods --as=<service-account-user-name> -n <namespace>
+```
+## so we should create a role.yml file in which we tell what we can access and role-binding.yml in which we tell which user has what role
+
+# cluster level:
+
+## Setting up the kubernetes cluster
+```yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
+```
+
+## creata a dashboard-admin-user.yml
+
+## Get the access token 
+```yaml
+kubectl -n kubernetes-dashboard create token admin-user
+```
+## Copy the token for use in the Dashboard login.
+
+## Access the Dashboard
+```yaml
+kubectl proxy
+```
+
+## open the dashboard
+```yaml
+http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
+```
+
+## now use the token from previous step to login and from there in dashboard we can monitor
+
+
+# custom resource definition
+## like pod,deployment these are resources in kubernetes so we can create our own resources and for that we have to define our resource and that is known as custom resource definition
+## so we create a definition(devops-crd.yml) then based on this we create a custom resource(devops-cr.yml) so our resource is created.
+
+# helm
+## Helm is the package manager for Kubernetes, designed to simplify the creation, packaging, configuration, and deployment of applications to Kubernetes clusters.
+## In simple words instead of creating deployments, services,etc for different applications(nginx,apache). helm helps to do this without creating these resources seperately
+
+## helm charts: These are structured packages containing YAML templates and configuration values that define all necessary Kubernetes resources (such as Deployments, Services, and ConfigMaps) required to run an application. 
+
+## script to install helm
+```yaml
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-4
+chmod 700 get_helm.sh
+./get_helm.sh
+```
+
+## For creating helm chart
+```yaml
+helm create <helm-chart-name>
+eg. helm create apache-helm
+```
+
+## this is structure how it create each yam file for template and values.
+
+## after making any changed to template and value.yml we package our chart
+```yaml
+helm package apache-helm/
+```
+
+## Now we install our chart
+```yaml
+helm install <name> <chart name> -n <namespace> --create-namespace
+
+helm install dev-apache apache-helm -n dev-apache --create-namespace
+
+similarly we can make for productiona and all like as we made for dev(dev-apache)
+```
+
+## after this we can check by kubectl get pods -n dev-apache our pods/deployment everything created
+
+## Now if we want to change anything then we can change values.yaml and then our Chart.yml and update its appVersion (as we have changed in values so it indicates our file changed)
+## Now after this again package, " helm package apache-helm "
+
+## Now we can also upgrade this changes 
+```yaml
+helm upgrade prd-apache ./apache-helm -n prd-apache
+```
+## Now we can see let suppose for this new version we changed replicas from 2 to 3 so for this particular namespace we have now 3 replicas and for dev one we have 2.
+## we can also rollback our change to previous one
+```yaml
+helm rollback prd-apache <prev revision number> -n <namespace>
+
+helm rollback prd-apache 1 -n prd-apache
+```

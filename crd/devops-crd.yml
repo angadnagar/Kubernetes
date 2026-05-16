@@ -1,0 +1,38 @@
+kind: CustomResourceDefiniton
+apiVersion: apiextensions.k8s.io/v1
+metadata:
+  name: devopsbatches.devbatch.com
+spec:
+  group: devbatch.com  #group name(like in deployment we have apps/v1 so apps is groupname)
+  names:
+    plural: devopsbatches
+    singular: devopsbatch
+    kind: DevOpsBatch
+    shortNames:
+      - junoon
+      - batches
+      - devbatch
+  scope: Namespaced
+  versions:
+  - name: v1
+    served: true
+    storage: true
+    schema:
+      openAPIV3Schema:
+        type: object
+        properties:
+          spec:
+            type: object
+            properties:
+              name:
+                type: string
+                description: "This is name of Devops batches"
+              duration:
+                type: string
+                description: "This is duration of batches"
+              mode:
+                type: string
+                description: "This is mode of batch eg.(live/recorded)"
+              platform:
+                type: string
+                description: "This is platform of the batch"

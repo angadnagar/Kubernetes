@@ -1,0 +1,9 @@
+kind: DevOpsBatch
+apiVersion: devbatch.com/v1
+metadata:
+  name: devops-bacth-1
+spec:
+  name: Devops Zero to Hero batch 1
+  duration: 3 months
+  platform: devbatch.com
+  mode: live
