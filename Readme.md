@@ -300,6 +300,8 @@ eg. helm create apache-helm
 ```
 
 ## this is structure how it create each yam file for template and values.
+<img width="1025" height="732" alt="Screenshot 2026-05-16 220518" src="https://github.com/user-attachments/assets/2c68b8cc-1e50-43b9-b0ff-ab8352b9e7d5" />
+
 
 ## after making any changed to template and value.yml we package our chart
 ```yaml
