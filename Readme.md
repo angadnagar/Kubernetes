@@ -333,3 +333,27 @@ helm rollback prd-apache <prev revision number> -n <namespace>
 
 helm rollback prd-apache 1 -n prd-apache
 ```
+
+## we can also check our installed repos by this
+```yaml
+helm search repo <repo name>
+helm search repo nginx
+
+helm repo list     (to see what repo we added)
+```
+## we can also add repositories
+```yaml
+helm repo add <repo name>
+helm repo add stable https://charts.helm.sh/stable
+```
+## for this link which is used for repo install, we can find it from "artifacthub". We can directly install what we want from here.
+```yaml
+helm install <name for our release> oci://registry-i.docker.io/bitnamicharts/nginx
+helm install nginx-helm oci://registry-i.docker.io/bitnamicharts/nginx -n nginx --create-namespace
+
+we can also uninstall with this
+helm uninstall <name>
+helm uninstall nginx-helm
+```
+
+
