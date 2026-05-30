@@ -357,3 +357,23 @@ helm uninstall nginx-helm
 ```
 
 
+# Init Container vs Side car container
+## Init Container is used when some initialization is needed before the main container runs such as initial setup and all
+## Side car container works with main container it helps main container 
+
+```yaml
+Important commands
+kubectl logs <name of pod> -c <container-name>
+kubectl logs init-test -c init-container
+```
+
+# Service Mesh
+## A service mesh is a dedicated infrastructure layer that manages service-to-service communication within a microservices architecture.
+## like in zomato there are various services such as for menu, orders, delivery, events and how these services redirect we need "Gateway" and for managing these traffic where to redirect we need Service Mesh
+
+# Istio: Popular tool for service mesh
+## refer this when installing istio and setup : https://istio.io/latest/docs/ambient/getting-started/ and https://istio.io/latest/docs/setup/getting-started/
+
+## In istio we have these components:
+- ## Envoy: Sidecar container/proxies per microservice to handle ingress/egress traffic between services in the cluster and from services to external services.
+- ## Istiod: It is control plane of Istio. It provides service discovery (all this we can find in readme when installing istio)                           
