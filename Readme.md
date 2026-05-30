@@ -376,4 +376,7 @@ kubectl logs init-test -c init-container
 
 ## In istio we have these components:
 - ## Envoy: Sidecar container/proxies per microservice to handle ingress/egress traffic between services in the cluster and from services to external services.
-- ## Istiod: It is control plane of Istio. It provides service discovery (all this we can find in readme when installing istio)                           
+- ## Istiod: It is control plane of Istio. It provides service discovery (all this we can find in readme when installing istio)             
+
+# Project - 3 Tier Application Deployment on Kubernetes(Reactjs,Nodejs,MongoDB)
+## inside projects folder added k8s manifest files for the chat app, with those file we can deploy and expose our frontend/backend service to external user and with the help of ingress we route different service traffic to different routes.
