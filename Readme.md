@@ -393,6 +393,9 @@ kubectl logs init-test -c init-container
 
 ## and all this data from all components (like scheduler, api server) goes to Prometheus and then all this data goes to Visualization(Grafana)
 
+<img width="1760" height="540" alt="Screenshot 2026-06-01 225301" src="https://github.com/user-attachments/assets/49e01e08-a7f3-445e-9c36-616643f6c989" />
+
+
 ## Now we will setup prometheus and grafana
 ## We first install helm 
 ## then we add prometheus-community using helm with this it is added in repo and then we update our repo
