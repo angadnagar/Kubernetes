@@ -380,3 +380,42 @@ kubectl logs init-test -c init-container
 
 # Project - 3 Tier Application Deployment on Kubernetes(Reactjs,Nodejs,MongoDB)
 ## inside projects folder added k8s manifest files for the chat app, with those file we can deploy and expose our frontend/backend service to external user and with the help of ingress we route different service traffic to different routes.
+
+# Kubernetes Monitoring
+## Observability: It is based on 
+##  1. Metrics  ->  Monitoring (Prometheus, Grafana, Kibana)
+##  2. Logs     ->  Logging (Loki, Promtail)
+##  3. Traces   ->  Tracing (Jaegar Opentelemetry)
+
+## with metrics we know (What is happening in our server), with logs we know (Why this is happening), with traces we know (How)
+
+## there is node exporter which exports all worker nodes data to a specific port(let 9100) and inside kube-system namespace there are services of master node(api server, scheduler, etcd, controller manager) all this also needs to be monitored and for this kube-state-metrics is required which monitors the whole cluster
+
+## and all this data from all components (like scheduler, api server) goes to Prometheus and then all this data goes to Visualization(Grafana)
+
+## Now we will setup prometheus and grafana
+## We first install helm 
+## then we add prometheus-community using helm with this it is added in repo and then we update our repo
+```yaml
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+
+we can get this prometheus-community helm chart link in github
+
+helm repo update
+```
+
+## now with helm we install prometheus-stack
+```yaml
+helm install prometheus-stack prometheus-community/kube-prometheus-stack --namespace monitoring --set prometheus.service.nodePort=30000 --set grafana.service.nodePort=31000 --set grafana.service.type=NodePort --set prometheus.service.type=NodePort
+
+if we want to set something in values.yaml in helm then we can set that using this --set prometheus.service.nodePort this means inside prometheus service set nodePort
+```
+## after this we can check that all pods are running such as node-exporter, kube-state-metrics and all
+
+## then we can port forward the service for prometheus(on 9090) and grafana(on 3000) to access them
+
+## then for logging into grafana we need admin password so we can get password from secret of grafana service
+```yaml
+                    (service name)                                  (secrets are generally present in .data)
+kubectl get secret prometheus-stack-grafana -n monitoring -o jsonpath="{.data.admin-password}" | base64 --decode
+```
